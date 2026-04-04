@@ -17,7 +17,7 @@ If either is missing, ask the user before proceeding.
 
 ## Step 1: Load the Skill Matrix
 
-Read `resources/assessments/skill_matrix.toon` in full. Use it as the source of truth for all skill categories, sub-skills, and target proficiency levels (A2 / A3 / A4).
+Read `resources/promotion-assessor/skill_matrix.toon` in full. Use it as the source of truth for all skill categories, sub-skills, and target proficiency levels (A2 / A3 / A4).
 
 ## Step 2: Parse the Transcript
 
