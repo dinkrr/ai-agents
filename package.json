@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "convert-ppt": "node scripts/assessment-orchestrator/convert-presentation.js"
+  },
+  "devDependencies": {
+    "xlsx": "^0.18.5"
+  },
+  "dependencies": {
+    "officeparser": "^6.0.7"
+  }
+}

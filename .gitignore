@@ -1,2 +1,15 @@
 ﻿# Evaluations folder contains confidential candidate data
 evaluations/
+
+# Archived source files — content converted to markdown, originals not needed in git
+resources/archived/
+
+# Node
+node_modules/
+package-lock.json
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Development/session working notes
+SESSION-NOTES.md
