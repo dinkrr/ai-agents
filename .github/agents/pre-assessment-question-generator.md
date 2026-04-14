@@ -1,6 +1,12 @@
 ---
 description: Generates tailored assessment questions for a candidate's Pre-ASMT session. Use after the Self Presentation has been approved. Requires the approved Self Presentation, target title, and expert assignment map. Produces a copy-paste ready question set organized by section, expert, and skill.
 tools: [execute, read]
+handoffs:
+  - label: "💾 Save Questions"
+    agent: pre-assessment-question-generator
+    prompt: "Save the Pre-ASMT session questions generated above to evaluations/pre-assessment-question-generator/[Candidate Name]-[Target Title]-Questions.md and confirm completion."
+    send: true
+---
 ---
 
 # Pre-Assessment Question Generator
@@ -170,8 +176,12 @@ These are Core/Required skills for [Target Title] that the candidate did not men
 
 Generate questions only for the sections assigned to each expert per the input. If the Committee Head only owns Warm-up + Leadership, do not generate Development Experience questions and attribute them to the Committee Head.
 
-After generating the questions, ask the user if they want to save the output. If yes, save to:
-```
-evaluations/pre-assessment-question-generator/[Candidate Name]-[Target Title]-Questions.md
-```
-(Create the directory if it does not exist.)
+---
+
+## Phase 2 Complete — Awaiting Human Decision
+
+After presenting the complete question set, your job is done. The button below will appear for the user to save the questions:
+
+- **💾 Save Questions** — clicking this saves the questions to `evaluations/pre-assessment-question-generator/[Candidate Name]-[Target Title]-Questions.md`
+
+Do not save the file or ask follow-up questions — wait for the user to click the button.

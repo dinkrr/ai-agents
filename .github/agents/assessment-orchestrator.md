@@ -9,7 +9,7 @@ handoffs:
     prompt: "The Self Presentation review above is complete and the Committee Head has approved it. Generate the Pre-ASMT session questions using the Self Presentation content and expert assignments provided in this conversation. The Gaps to Probe list from the review above must be covered — ensure at least one question per gap skill is included in the relevant section."
     send: false
   - label: "❌ Send Back to Candidate"
-    agent: copilot
+    agent: agent
     prompt: "The Self Presentation review above is complete and the decision is SEND BACK. Using the 'Feedback for Candidate' section from the review above, draft a professional, constructive email to send to the candidate explaining what needs to be improved before the session can be scheduled."
     send: false
 ---
