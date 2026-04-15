@@ -3,7 +3,7 @@ description: Generates tailored assessment questions for a candidate's Pre-ASMT 
 tools: [execute, read]
 handoffs:
   - label: "💾 Save Questions"
-    agent: generate-session-questions
+    agent: generate-session-questions.agent
     prompt: "Save the Pre-ASMT session questions generated above to evaluations/pre-assessment/[Candidate Name]-[Target Title]-Questions.md and confirm completion."
     send: true
 ---
