@@ -1,11 +1,10 @@
 ---
 description: Orchestrates the full pre-assessment workflow — reviews the candidate's Self Presentation and presents the result for human approval via interactive buttons. Use this as the single entry point for the assessor workflow.
 argument-hint: "Candidate name · Target title (A2/A3/A4) · PPT file path or content · Expert assignments"
-tools: [execute, read, agent]
-agents: ['self-presentation-reviewer', 'pre-assessment-question-generator']
+tools: [execute, read]
 handoffs:
   - label: "✅ Approve — Generate Session Questions"
-    agent: pre-assessment-question-generator
+    agent: generate-session-questions
     prompt: "The Self Presentation review above is complete and the Committee Head has approved it. Generate the Pre-ASMT session questions using the Self Presentation content and expert assignments provided in this conversation. The Gaps to Probe list from the review above must be covered — ensure at least one question per gap skill is included in the relevant section."
     send: false
   - label: "❌ Send Back to Candidate"
@@ -14,7 +13,7 @@ handoffs:
     send: false
 ---
 
-# Assessment Session Orchestrator
+# Pre-Assessment Orchestrator
 
 You run Phase 1 of the EPAM pre-assessment workflow — collecting inputs, converting the presentation if needed, and running the Self Presentation review. Phase 2 (question generation) is triggered by the human via an approval button.
 
@@ -37,31 +36,24 @@ If expert assignments are not provided, default to Pattern A and inform the user
 
 ---
 
-## Phase 1 — Self Presentation Review
+## Step 2: Load the Presentation
 
-### 1a: Convert PPT if needed
+Use the `convert-ppt` skill if the input is a `.pptx` file path. Otherwise read the file directly or use the inline content as-is.
 
-If the Self Presentation is a `.pptx` file path, run the conversion before passing anything to the subagent:
+---
 
-```
-npm run convert-ppt -- <path-to-file.pptx>
-```
+## Step 3: Review the Self Presentation
 
-Read the resulting `.md` file. Use its content as the Self Presentation in all subsequent steps.
-
-If the input is already a `.md` / `.txt` path, read it directly. If it is pasted inline, use it as-is.
-
-### 1b: Invoke the Self Presentation Reviewer
-
-Invoke the `self-presentation-reviewer` agent as a subagent. Pass it:
-
+Use the `review-self-presentation` skill. Pass it:
 - Candidate name
 - Target title
-- The full Self Presentation content (text, not file path)
+- The full Self Presentation text (not a file path)
 
-Wait for the subagent to return its complete output before proceeding.
+Wait for the skill to complete its full output before proceeding.
 
-### 1c: Present the Review Output
+---
+
+## Step 4: Present the Review Output
 
 Show the user the complete review output — do not summarise or truncate it:
 - Category assessment table (Development Experience, Architecture on Practice, Engineering Excellence, Leadership)
@@ -75,7 +67,7 @@ Show the user the complete review output — do not summarise or truncate it:
 
 After presenting the review output, your job is done. The two buttons below will appear for the user to choose their next action:
 
-- **✅ Approve — Generate Session Questions** — clicking this pre-fills a prompt for the `pre-assessment-question-generator` agent. The user reviews the prompt and hits Send to proceed.
+- **✅ Approve — Generate Session Questions** — clicking this pre-fills a prompt for the `generate-session-questions` agent. The user reviews the prompt and hits Send to proceed.
 - **❌ Send Back to Candidate** — clicking this pre-fills a prompt to draft the send-back email. The user reviews it and hits Send to proceed.
 
 Do not generate any further output after presenting the review. Wait for the user to click a button.
@@ -85,6 +77,6 @@ Do not generate any further output after presenting the review. Wait for the use
 ## Rules
 
 1. **Stop after presenting the review.** The handoff buttons handle the human decision — do not ask follow-up questions or prompt the user to reply.
-2. **Never re-convert the PPT.** Once the content is loaded, the text is available in the conversation context for the next agent via the handoff.
-3. **Keep the subagent output intact.** The gaps list and feedback must be fully visible in the conversation so the next agent can reference them.
+2. **Never re-convert the PPT.** Once the content is loaded, it is available in the conversation context.
+3. **Keep the review output intact.** The gaps list and feedback must be fully visible in the conversation so the next agent can reference them.
 4. **One candidate per run.** Start a fresh invocation for each candidate.

@@ -1,0 +1,206 @@
+description: Assessments Skill Matrix
+scoring:
+  levels[3]: A2,A3,A4
+  note: "Each skill has min_scores with keys A2, A3, A4 representing the minimum expected proficiency (0-4) at that level. Skills without min_scores are qualitative/awareness-only."
+categories[4]:
+  - name: Development Experience
+    sections[2]:
+      - name: Hard Skills and Experience questions
+        skills[11]:
+          - name: .NET
+            min_scores:
+              A2: 2
+              A3: 3
+              A4: 4
+          - name: Software Engineering Knowledge & Experience
+            min_scores:
+              A2: 2
+              A3: 3
+              A4: 3
+          - name: Algorithms & Data structures
+            min_scores:
+              A2: 2
+              A3: 3
+              A4: 3
+          - name: Troubleshooting
+            min_scores:
+              A2: 2
+              A3: 3
+              A4: 3
+            sub_skills[2]: Database concepts,Profiling
+          - name: .NET Asynchronous and Multithreading Programming
+            min_scores:
+              A2: 2
+              A3: 3
+              A4: 3
+          - name: Common security knowledge
+            min_scores:
+              A2: 1
+              A3: 2
+              A4: 2
+          - name: SQL
+            min_scores:
+              A2: 1
+              A3: 2
+              A4: 3
+          - name: NoSQL Databases
+            min_scores:
+              A2: 2
+              A3: 2
+              A4: 3
+          - name: .NET ORM
+            min_scores:
+              A2: 2
+              A3: 2
+              A4: 3
+          - name: Message Brokers (MQ)
+            min_scores:
+              A2: 1
+              A3: 2
+              A4: 3
+          - name: Docker
+            min_scores:
+              A2: 2
+              A3: 2
+              A4: 3
+      - name: GenAI knowledge and usage (becoming mandatory)
+        skills[6]:
+          - name: AI Literacy
+          - name: Generative AI Fundamentals
+          - name: Prompt Engineering
+          - name: AI for developers
+          - name: Gen AI Assisted Development
+            min_scores:
+              A2: 1
+              A3: 2
+              A4: 2
+          - name: Gen AI in SDLC
+            min_scores:
+              A2: 1
+              A3: 2
+              A4: 2
+            sub_skills[5]: Applied GenAI for SDLC Efficiency,GenAI Toolset for SDLC,AI Use Cases,AI Solutions,Gen AI Application Development
+  - name: Architecture on Practice
+    skills[6]:
+      - name: ".NET API Development & Integration (REST, auth, ..)"
+        min_scores:
+          A2: 2
+          A3: 3
+          A4: 3
+      - name: Software Design
+        min_scores:
+          A2: 2
+          A3: 3
+          A4: 3
+        sub_skills[5]: Work with Technical Documentation,Design Patterns,Design Principles,Design and develop for FR/NFR,Modeling and diagramming
+      - name: Software Architectural Styles
+        min_scores:
+          A2: 2
+          A3: 3
+          A4: 3
+      - name: Cloud Fundamentals
+        min_scores:
+          A2: 2
+          A3: 3
+          A4: 3
+      - name: Microsoft Azure
+        min_scores:
+          A2: 2
+          A3: 2
+          A4: 3
+      - name: Amazon Web Services
+        min_scores:
+          A2: 2
+          A3: 2
+          A4: 3
+  - name: Engineering Excellence (Quality & Processes)
+    sections[2]:
+      - name: Quality
+        skills[2]:
+          - name: .NET Unit and Integration Testing
+            min_scores:
+              A2: 2
+              A3: 3
+              A4: 4
+            sub_skills[4]: Unit Testing,Automated testing in Software Engineering,Testing Pyramid,Performance Testing in Software Engineering
+          - name: Software Engineering Practices
+            min_scores:
+              A2: 2
+              A3: 3
+              A4: 3
+            sub_skills[8]: CI/CD,Branching Strategies,Code Quality Practices,Code Review,Refactoring,Static Code Analysis,Deployment Strategies,Secure SDLC in Software Engineering
+      - name: Processes
+        skills[3]:
+          - name: Software Development Methodology in Engineering
+            min_scores:
+              A2: 1
+              A3: 2
+              A4: 2
+            sub_skills[3]: Agile,Scrum,Kanban
+          - name: Software Engineering Processes
+            min_scores:
+              A2: 2
+              A3: 3
+              A4: 3
+          - name: Estimation and Work Planning
+            min_scores:
+              A2: 1
+              A3: 2
+              A4: 3
+            sub_skills[2]: "Work with Requirements (DoR, DoD)",Technical Debt Management
+  - name: Leadership (Customer Relations & Team Management)
+    skills[10]:
+      - name: Interviewing and Hiring
+        min_scores:
+          A2: 0
+          A3: 2
+          A4: 3
+      - name: Leadership
+        min_scores:
+          A2: 0
+          A3: 1
+          A4: 2
+      - name: Customer relationship
+        min_scores:
+          A2: 0
+          A3: 1
+          A4: 2
+      - name: Driving Change and Innovation
+        min_scores:
+          A2: 0
+          A3: 1
+          A4: 2
+      - name: Developing Others
+        min_scores:
+          A2: 0
+          A3: 1
+          A4: 2
+        sub_skills[2]: Mentoring,Onboarding and Adaptation
+      - name: Clarity and argumentation
+        min_scores:
+          A2: 1
+          A3: 1
+          A4: 2
+      - name: Teamwork and Collaboration
+        min_scores:
+          A2: 1
+          A3: 2
+          A4: 2
+        sub_skills[1]: Team Management
+      - name: Communication
+        min_scores:
+          A2: 1
+          A3: 2
+          A4: 2
+      - name: Conflict management
+        min_scores:
+          A2: 0
+          A3: 1
+          A4: 2
+        sub_skills[3]: Presenting,Negotiations,Meeting Facilitation
+      - name: Ownership
+        min_scores:
+          A2: 1
+          A3: 2
+          A4: 2
+        sub_skills[5]: Decision-making,Problem-solving,Self-Management,Time Management,Task Management

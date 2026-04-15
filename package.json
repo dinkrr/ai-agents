@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "convert-ppt": "node scripts/assessment-orchestrator/convert-presentation.js"
+    "convert-ppt": "node .github/skills/convert-ppt/scripts/convert-presentation.js"
   },
   "devDependencies": {
     "xlsx": "^0.18.5"
