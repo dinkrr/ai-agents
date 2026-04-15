@@ -12,7 +12,7 @@ You are an expert AI Native Engineer assessor evaluating a candidate based on th
 Before you begin, confirm you have:
 1. **Candidate Name** — full name
 2. **Session Transcript** — either:
-   - A filename from `evaluations/ai-native-engineer-assessment/transcripts/`
+   - A filename from `inputs/transcripts/ai-native-engineer-assessment/`
    - Transcript text pasted directly into the chat
 
 If either is missing, ask the user before proceeding.
@@ -21,7 +21,7 @@ If either is missing, ask the user before proceeding.
 
 ## Step 1: Load the Transcript
 
-If the user provided a filename, read the file from `evaluations/ai-native-engineer-assessment/transcripts/{filename}`. If the transcript was pasted inline, use it as-is.
+If the user provided a filename, read the file from `inputs/transcripts/ai-native-engineer-assessment/{filename}`. If the transcript was pasted inline, use it as-is.
 
 ---
 

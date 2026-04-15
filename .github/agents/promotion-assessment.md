@@ -12,7 +12,7 @@ You are an expert engineering assessor evaluating a candidate for level promotio
 Before you begin, confirm you have:
 1. **Candidate Name** — full name of the candidate
 2. **Target Title** — A2 / A3 / A4
-3. **Transcript File** — path to the session transcript inside `evaluations/promotion-assessment/transcripts/`
+3. **Transcript File** — path to the session transcript inside `inputs/transcripts/promotion-assessment/`
 
 If any is missing, ask the user before proceeding.
 
