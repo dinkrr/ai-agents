@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "convert-ppt": "node .github/skills/convert-ppt/scripts/convert-presentation.js"
+    "convert-ppt": "node .github/skills/review-self-presentation/scripts/convert-presentation.js"
   },
   "devDependencies": {
     "xlsx": "^0.18.5"
