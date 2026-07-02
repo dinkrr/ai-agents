@@ -1,4 +1,5 @@
-﻿# Evaluations folder contains confidential candidate data
+﻿# Candidate data — inputs and outputs contain confidential information
+inputs/
 evaluations/
 
 # Archived source files — content converted to markdown, originals not needed in git

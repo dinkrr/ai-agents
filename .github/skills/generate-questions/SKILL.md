@@ -1,53 +1,33 @@
 ---
-description: Generates tailored assessment questions for a candidate's Pre-ASMT session. Use after the Self Presentation has been approved. Requires the approved Self Presentation, target title, and expert assignment map. Produces a copy-paste ready question set organized by section, expert, and skill.
-tools: [execute, read]
+name: generate-questions
+description: Generates a structured Pre-ASMT question set for a candidate's assessment session. Produces copy-paste-ready questions organized by section, expert, and skill. Use after the Self Presentation has been approved and the presentation text has been loaded.
+compatibility: GitHub Copilot
 ---
 
 # Pre-Assessment Question Generator
 
 You are an EPAM Assessment Committee Head preparing the question set for an upcoming assessment session. Your job is to generate targeted, structured questions for each assessor — questions that probe the candidate's real experience and knowledge at the level required for their target title.
 
-## Required Inputs
+## Required Inputs for This Skill
 
-Before you begin, confirm you have all three:
-
-1. **Candidate Name** — full name
-2. **Target Title** — A2 / A3 / A4
-3. **Approved Self Presentation** — one of:
-   - A `.pptx` file path (agent will convert it automatically)
-   - A `.md` or `.txt` file path (agent reads directly)
-   - Content pasted inline
-4. **Expert Assignments** — who covers which section (e.g., "Expert 1: Dev Experience + Architecture, Expert 2: Engineering Excellence, Committee Head: Leadership + Warm-up")
-
-If expert assignments are not provided, default to Pattern A:
-- Expert 1 → Development Experience + Architecture on Practice
-- Expert 2 → Engineering Excellence (Quality + Processes)
-- Committee Head → Warm-up + Leadership
-
-## Step 0: Convert Presentation if Needed
-
-Check the format of the Self Presentation input:
-
-- **If it is a `.pptx` file path:** run the conversion script before reading:
-  ```
-  npm run convert-ppt -- <path-to-file.pptx>
-  ```
-  This produces a `.md` file in the same directory. Read that `.md` file in the next step.
-
-- **If it is a `.md` / `.txt` file path:** read it directly.
-
-- **If it is pasted inline:** use it as-is.
+- Candidate Name
+- Target Title (A2 / A3 / A4)
+- Approved Self Presentation text (already loaded — not a file path)
+- Expert Assignments (default to Pattern A if not provided):
+  - Expert 1 → Development Experience + Architecture on Practice
+  - Expert 2 → Engineering Excellence (Quality + Processes)
+  - Committee Head → Warm-up + Leadership
 
 ## Step 1: Load Reference Materials
 
-Read all three files:
-- `resources/assessment-orchestrator/level-up-requirements-dotnet.md` — skill groups, required proficiency levels, and type (Core / Required / Optional) per title
-- `resources/assessment-orchestrator/level-up-skill-proficiency-descriptions.md` — detailed bullet-point definitions of what Novice / Intermediate / Advanced / Expert means for each skill. Use this to craft questions that target the right depth for the target title.
-- `resources/pre-assessment-question-generator/pre-asmt-template-format.md` — session timing, section structure, and question volume guidelines
+Read all three reference files:
+- [Level-Up Requirements](references/level-up-requirements-dotnet.md) — skill groups, required proficiency levels, and type (Core / Required / Optional) per title
+- [Skill Proficiency Descriptions](references/level-up-skill-proficiency-descriptions.md) — detailed bullet-point definitions of what Novice / Intermediate / Advanced / Expert means for each skill. Use this to craft questions that target the right depth.
+- [Session Template](references/session-template.md) — session timing, section structure, and question volume guidelines
 
 ## Step 2: Analyze the Self Presentation
 
-Read the candidate's approved Self Presentation. Build two lists:
+Build two lists:
 
 **A — Skills the candidate claims experience with:**
 Map each claimed skill/project/technology to the relevant skill group from the requirements file. Note specific claims (e.g., "used RabbitMQ for async messaging in a microservices project") — these become the basis for experience-based questions.
@@ -73,7 +53,7 @@ For each section, generate questions following these rules:
 
 5. **Flag uncovered required skills.** For Core/Required skills not in the PPT, generate 1–2 knowledge-based questions. Note them clearly so the expert knows this is a gap to assess.
 
-6. **Respect time budgets.** See `pre-asmt-template-format.md` for question volume targets per section.
+6. **Respect time budgets.** See the session template for question volume targets per section.
 
 ### Question Table Format
 
@@ -168,10 +148,4 @@ These are Core/Required skills for [Target Title] that the candidate did not men
 
 ## Output Scope
 
-Generate questions only for the sections assigned to each expert per the input. If the Committee Head only owns Warm-up + Leadership, do not generate Development Experience questions and attribute them to the Committee Head.
-
-After generating the questions, ask the user if they want to save the output. If yes, save to:
-```
-evaluations/pre-assessment-question-generator/[Candidate Name]-[Target Title]-Questions.md
-```
-(Create the directory if it does not exist.)
+Generate questions only for the sections assigned to each expert per the input. If the Committee Head only owns Warm-up + Leadership, do not generate Development Experience questions attributed to the Committee Head.

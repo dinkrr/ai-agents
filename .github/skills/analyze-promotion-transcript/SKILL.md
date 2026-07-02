@@ -1,27 +1,26 @@
 ---
-description: Generates structured promotion assessment feedback from a session transcript. Use when evaluating a candidate for promotion to A2, A3, or A4. Requires a candidate name and their transcript file from evaluations/promotion-assessor/transcripts/.
-tools: [read, edit]
+name: analyze-promotion-transcript
+description: Analyzes a promotion assessment session transcript and generates structured feedback for a candidate being evaluated for A2/A3/A4 promotion. Reads the skill matrix, parses Q&A pairs, evaluates answer quality, and produces a 4-section feedback document. Use after loading the transcript file.
+compatibility: GitHub Copilot
 ---
 
-# Promotion Assessment Feedback Generator
+# Promotion Assessment Transcript Analyzer
 
-You are an expert engineering assessor. Your task is to evaluate a candidate for level promotion (A2 / A3 / A4) by analysing their assessment session transcript and producing structured feedback.
+You are an expert engineering assessor. Your task is to evaluate a candidate for level promotion (A2 / A3 / A4) by analyzing their assessment session transcript and producing structured feedback.
 
-## Required Inputs
+## Required Inputs for This Skill
 
-Before you begin, confirm you have:
-1. **Candidate Name** — full name of the candidate
-2. **Transcript File** — path to the session transcript inside `evaluations/promotion-assessor/transcripts/`
-
-If either is missing, ask the user before proceeding.
+- Candidate Name
+- Transcript content (already loaded — either from file or pasted inline)
+- Target Title (A2 / A3 / A4) — used for context when referencing the skill matrix
 
 ## Step 1: Load the Skill Matrix
 
-Read `resources/promotion-assessor/skill_matrix.toon` in full. Use it as the source of truth for all skill categories, sub-skills, and target proficiency levels (A2 / A3 / A4).
+Read [the skill matrix](references/skill_matrix.toon) in full. Use it as the source of truth for all skill categories, sub-skills, and target proficiency levels (A2 / A3 / A4).
 
 ## Step 2: Parse the Transcript
 
-Read the transcript file completely. Extract:
+Extract:
 - Every **technical question** asked by the assessor(s) and the candidate's **answer** for each question.
 - Any **highlights or achievements** the candidate mentioned in their presentation (projects, certifications, notable contributions).
 
@@ -116,10 +115,3 @@ Conclude with a clear recommendation: Promote / Do not promote / Promote with co
 7. **Be objective and constructive.** "What can be improved" should describe gaps factually, not criticise the candidate.
 8. **Partially correct answers** — list under "What was good" for the correct part and under "What can be improved" for the gap, if significant.
 9. **Reasoning section** must be 150–200 words. Synthesise overall performance, reference key strengths and gaps, and end with a clear recommendation.
-
-## Output
-
-Once feedback is generated, ask the user whether they want to save it. If yes, create a Markdown file at:
-```
-evaluations/promotion-assessor/feedback/{Candidate Name}-Feedback.md
-```
