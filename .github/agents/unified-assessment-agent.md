@@ -1,7 +1,8 @@
 ---
 description: "Single entry point for the EPAM pre-assessment workflow. Use when starting an assessment for a candidate — runs Self Presentation review, presents APPROVE or SEND BACK decision, then generates session questions on approval or drafts the send-back email and stops. Requires candidate name, target title (A2/A3/A4), Self Presentation file path or content, and optional expert assignments."
 argument-hint: "Candidate name · Target title (A2/A3/A4) · Self Presentation file path · Expert assignments"
-tools: [execute, read, edit]
+tools: [agent, read, edit]
+agents: ["assessment-feedback-generator"]
 handoffs:
   - label: "✅ Approve — Generate Session Questions"
     agent: agent
@@ -48,6 +49,7 @@ Use the `review-self-presentation` skill. Pass it:
 - The Self Presentation as given (file path or inline content) — the skill handles loading and conversion internally
 
 Wait for the skill to complete its full output before proceeding.
+
 
 ---
 
