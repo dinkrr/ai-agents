@@ -1,6 +1,6 @@
 ---
 name: evaluate-ai-native
-description: Evaluates candidates for the AI Native Engineer role from a session transcript. Produces eligibility check, use case quality assessment, technical Q&A validation, productivity metrics, star ratings (1-5) across 5 dimensions, and a final recommendation (Yes / No / Yes with improvements). Use after loading the transcript content.
+description: Evaluates candidates for the AI Native Engineer role from a session transcript. Applies eligibility, use case quality, technical accuracy, and productivity evidence checks, then produces the ten-field evaluation form with five ratings, strong points, improvement areas, suggestions, and a final decision. Use after loading the transcript content.
 compatibility: GitHub Copilot
 ---
 
@@ -92,104 +92,70 @@ Extract and highlight ALL quantifiable metrics mentioned by the candidate:
 
 ## Evaluation Form Criteria (Rate 1–5 Stars)
 
-### 1. Presentation Clarity & Topic Explanation
+### 2. Presentation clarity and topic explanation
 How clearly were the key concepts and objectives communicated? Evaluate structure and flow, clarity of explanations, ability to articulate complex concepts, logical progression.
+Scale endpoints: Very unclear -> Extremely clear.
 
-### 2. Effectiveness of AI Tool Utilization
+### 3. Effectiveness of AI tool utilization
 How well did the presenter demonstrate practical AI tool usage? Evaluate real examples, depth of tool knowledge, practical vs. theoretical, variety of tools.
+Scale endpoints: Not effective -> Highly effective.
 
-### 3. Usage of Advanced Features (Agents, MCP, etc.)
+### 4. Usage of advanced features (Agents, instructions, MCP, etc.)
 Rate the demonstration of advanced AI features: Agent Mode, MCP integrations, custom MCP servers, VS Code extensions, agents.md or instruction files.
+Scale endpoints: Not demonstrated -> Very well demonstrated.
 
-### 4. Optimization Using GenAI
+### 5. Optimization Using GenAI
 How effectively has the candidate leveraged GenAI to streamline work? Evaluate workflow optimizations, effort reduction, smart use of AI for repetitive tasks, strategic application.
+Scale endpoints: Limited knowledge -> Expert knowledge.
 
-### 5. Productivity Gains Using GenAI
+### 6. Productivity Gains Using GenAI
 Measurable efficiency improvements, faster delivery, or enhanced output. Evaluate quantifiable metrics, before/after comparisons, tangible business impact, enhanced output quality.
+Scale endpoints: Not much -> Good Productivity gain.
 
 ---
 
 ## Output Format
 
-```
-## Candidate: [Name from transcript]
+Use the ten fields below in order. Apply all evidence checks above, but incorporate their findings into these fields rather than adding separate assessment tables unless requested. Keep fields 7-9 ready to paste into the form. Use a 1-5 rating unless the user supplies a different scale.
 
-### Eligibility Check
-| Criterion | Status | Evidence |
-|-----------|--------|----------|
-| Active AI Tool Usage | ✅/⚠️/❌ | [specific evidence] |
-| Advanced GenAI Capabilities | ✅/⚠️/❌ | [specific evidence] |
-| End-to-End Use Cases | ✅/⚠️/❌ | [specific evidence] |
-| Programming Experience | ✅/⚠️/❌ | [specific evidence] |
-| Multi-Language Proficiency | ✅/⚠️/❌ | [specific evidence] |
-| Polyglot Mindset | ✅/⚠️/❌ | [specific evidence] |
+```markdown
+# AI Native Engineer Evaluation
 
-### Use Case Quality Assessment
-| Use Case | Description | Impact Level | Beneficiaries |
-|----------|-------------|--------------|---------------|
-| [Use Case 1] | [Brief description] | 🟢 Team/Org / 🟡 Individual | [Who benefits] |
+## 1. Candidate's Name
+[Full name]
 
-**Summary:** [X]% of use cases have team/organization-level impact.
-**Assessment:** [Strong/Adequate/Weak — explain if use cases are truly AI Native Engineer worthy]
+## 2. Presentation clarity and topic explanation
+**Rating: [X]/5**
+[Evidence-based justification. Very unclear -> Extremely clear.]
 
-### Technical Q&A Validation
-| Question Asked | Candidate's Answer (Summary) | Validation | Correct Answer (if needed) |
-|----------------|------------------------------|------------|----------------------------|
-| [Question 1] | [What candidate said] | ✅/⚠️/❌ | [Correction if wrong] |
+## 3. Effectiveness of AI tool utilization
+**Rating: [X]/5**
+[Evidence-based justification. Not effective -> Highly effective.]
 
-**Technical Accuracy Score:** [X]/[Total] questions answered correctly
-**Knowledge Gaps Identified:** [List any areas where understanding was incorrect]
+## 4. Usage of advanced features (Agents, instructions, MCP, etc.)
+**Rating: [X]/5**
+[Evidence-based justification. Not demonstrated -> Very well demonstrated.]
 
-### Productivity Metrics Shared
-| Metric Type | Before | After | Improvement | Context |
-|-------------|--------|-------|-------------|---------|
-| [Metric 1] | [Previous state] | [Current state] | [% or time saved] | [Who benefits, scale] |
+## 5. Optimization Using GenAI
+**Rating: [X]/5**
+[Evidence-based justification. Limited knowledge -> Expert knowledge.]
 
-**Metrics Quality Assessment:**
-| Aspect | Status | Notes |
-|--------|--------|-------|
-| Quantifiable | ✅/❌ | [Did candidate provide specific numbers?] |
-| Verifiable | ✅/❌ | [Are claims reasonable and believable?] |
-| Impactful | ✅/❌ | [Do metrics show significant value?] |
-| Team-level | ✅/❌ | [Do metrics benefit beyond the individual?] |
+## 6. Productivity Gains Using GenAI
+**Rating: [X]/5**
+[Evidence-based justification. Not much -> Good Productivity gain.]
 
-### Evaluation Form Ratings
+## 7. Strong Points?
+- [Specific strengths across presentation, tools, advanced features, optimization, and productivity; identify team-level versus individual impact.]
 
-**1. Presentation Clarity & Topic Explanation**
-⭐ Rating: [X]/5
-> [Justification with specific examples from transcript]
+## 8. Weak Points/Improvement areas?
+- [Specific gaps, technical corrections, and missing evidence; distinguish major from minor improvements.]
 
-**2. Effectiveness of AI Tool Utilization**
-⭐ Rating: [X]/5
-> [Justification with specific examples from transcript]
+## 9. Additional Comments or Suggestions
+[Actionable next steps, evidence limitations, and verification expectations.]
 
-**3. Usage of Advanced Features (Agents, MCP, etc.)**
-⭐ Rating: [X]/5
-> [Justification with specific examples from transcript]
-
-**4. Optimization Using GenAI**
-⭐ Rating: [X]/5
-> [Justification with specific examples from transcript]
-
-**5. Productivity Gains Using GenAI**
-⭐ Rating: [X]/5
-> [Justification with specific examples from transcript]
-
-### Final Decision
-**Recommendation:** [Yes / No / Yes with improvements]
-
-### Additional Comments or Suggestions
-**Key Strengths:**
-- [Strength 1]
-
-**Areas for Improvement:**
-- [Area 1]
-
-**Technical Knowledge Gaps (if any):**
-- [Gap 1 with correct information]
-
-**Specific Recommendations:**
-- [Recommendation 1]
+## 10. Final decision
+**[Yes / No / Yes with improvements]**
+[Short evidence-based rationale. For Yes with improvements, state whether improvement areas are major and reassessment is required.]
 ```
 
 ---
@@ -203,6 +169,10 @@ Measurable efficiency improvements, faster delivery, or enhanced output. Evaluat
 5. **Advanced Features Matter** — Strong demonstration of Agent Mode, MCP, etc. is a key differentiator
 6. **Validate Use Case Quality** — Individual-only productivity gains are not sufficient; look for team/org-level solutions
 7. **Verify Technical Accuracy** — Wrong answers to technical questions indicate knowledge gaps that must be flagged
+8. **Match the Current Form** — Preserve the ten field names and order. Field 8 asks for weaknesses/improvements despite the form's duplicated strong-points help text.
+9. **Preserve Evidence Detail** — Include eligibility concerns, team-impact percentage with its denominator, relevant technical corrections, and all quantifiable metrics in the appropriate fields. Distinguish savings from tool counts, workload scale, or maturity milestones.
+10. **Separate Claims from Verification** — Do not treat reported adoption, dashboards, guardrails, or savings as independently verified unless the transcript supports that conclusion.
+11. **Apply the Reassessment Rule** — For Yes with improvements, reassessment is conducted only if improvement areas are major. Explain severity based on missing core capabilities or material safety/evidence risks, not unfamiliarity with an optional framework alone.
 
 ---
 
