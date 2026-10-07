@@ -47,15 +47,20 @@ Use the `evaluate-ai-native` skill. Pass it:
 - Candidate name
 - The full transcript content
 
-The output should be the complete main assessment evaluation, including:
+The output should follow the current ten-field AI Native Engineer Evaluation form in the `evaluate-ai-native` skill:
 
-- Eligibility check
-- Use case quality assessment
-- Technical Q&A validation
-- Productivity metrics
-- Star ratings
-- Final recommendation
-- Official form submission link
+1. Candidate's Name
+2. Presentation clarity and topic explanation
+3. Effectiveness of AI tool utilization
+4. Usage of advanced features (Agents, instructions, MCP, etc.)
+5. Optimization Using GenAI
+6. Productivity Gains Using GenAI
+7. Strong Points?
+8. Weak Points/Improvement areas?
+9. Additional Comments or Suggestions
+10. Final decision
+
+Apply eligibility, use case quality, technical accuracy, and productivity evidence checks within these fields. Include five ratings with evidence-based justifications and the official form submission link. For `Yes with improvements`, state whether improvement areas are major; reassessment is conducted only for major improvement areas.
 
 ### If Session Type = Pre-Screening
 
