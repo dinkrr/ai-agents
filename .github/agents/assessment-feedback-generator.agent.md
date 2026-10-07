@@ -1,5 +1,5 @@
 ---
-description: Generates structured promotion assessment feedback from a session transcript. Use when evaluating a candidate for promotion to A2, A3, or A4. Requires a candidate name and their transcript file from evaluations/promotion-assessment/transcripts/.
+description: Generates structured promotion assessment feedback from a session transcript. Use when evaluating a candidate for promotion to A2, A3, or A4. Requires a candidate name and their transcript file from inputs/transcripts/promotion-assessment/.
 tools: [read, edit]
 ---
 

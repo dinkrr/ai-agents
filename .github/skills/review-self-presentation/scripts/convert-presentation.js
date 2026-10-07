@@ -35,14 +35,10 @@ if (ext !== '.pptx' && ext !== '.ppt') {
 const defaultOutput = inputPath.replace(/\.(pptx|ppt)$/i, '.md');
 const outputPath = process.argv[3] || defaultOutput;
 
-console.log(`Converting: ${inputPath}`);
+async function convert() {
+  console.log(`Converting: ${inputPath}`);
 
-parseOffice(inputPath, (result, err) => {
-  if (err) {
-    console.error('Conversion failed:', err.message);
-    process.exit(1);
-  }
-
+  const result = await parseOffice(inputPath);
   const filename = path.basename(inputPath, ext);
   const lines = [
     `# ${filename}`,
@@ -68,6 +64,11 @@ parseOffice(inputPath, (result, err) => {
 
   fs.writeFileSync(outputPath, lines.join('\n'), 'utf8');
   console.log(`Done: ${outputPath}`);
+}
+
+convert().catch((error) => {
+  console.error('Conversion failed:', error.message);
+  process.exit(1);
 });
 
 function extractText(node) {
