@@ -8,11 +8,9 @@ AI Agents for Assessment Activities — automating candidate evaluation workflow
 
 | Agent | Invoke | Purpose |
 |-------|--------|---------|
-| **AI Native Engineer Assessment / Pre-Screening Agent** | `@ai-native-engineer-assessor` | Evaluate AI Native Engineer candidates from either a **main assessment** transcript or a **pre-screening** transcript. Routes to the correct skill based on session type. |
-| **Promotion Assessor** | `@promotion-assessor` | Generate structured **promotion feedback** (A2 / A3 / A4) from an assessment session transcript, using the skill matrix. |
-| **Assessment Orchestrator** | `@assessment-orchestrator` | ⭐ **Start here for the pre-assessment workflow** — runs the full review → approval → question generation pipeline with a human-in-the-loop gate. |
-| **Self Presentation Reviewer** | `@self-presentation-reviewer` | Review a candidate's **Self Presentation** before the session — approves it or sends it back with specific feedback *(also invoked by the orchestrator)*. |
-| **Pre-Assessment Question Generator** | `@pre-assessment-question-generator` | Generate a structured **question set** for the assessment session, organized by expert and section *(also invoked by the orchestrator)*. |
+| **AI Native Engineer Assessment** | `@ai-native-engineer-assessment` | Evaluate a **main assessment**, **pre-screening**, or **Java TI2 interview** using the matching skill. |
+| **Promotion Assessment Feedback** | `@assessment-feedback-generator` | Generate structured **promotion feedback** (A2 / A3 / A4) from an assessment session transcript. |
+| **Unified Assessment** | `@unified-assessment-agent` | Start the pre-assessment workflow: review the presentation, wait for the human approval gate, then generate session questions. |
 
 ---
 
@@ -20,7 +18,7 @@ AI Agents for Assessment Activities — automating candidate evaluation workflow
 
 ```text
 Assessing for the AI Native Engineer role?
-  └─ @ai-native-engineer-assessor
+  └─ @ai-native-engineer-assessment
      Provide:
        - Candidate name
        - Transcript file or pasted transcript
@@ -42,23 +40,27 @@ Assessing for the AI Native Engineer role?
        → Saves to:
          evaluations/ai-native-engineer-assessment/feedback/{Candidate Name}-Pre-Screening-Feedback.md
 
+     Java TI2 interview:
+       → Uses evaluate-ai-native-java
+       → Produces the Java hands-on 30-point assessment and hiring feedback
+       → Reads from:
+         inputs/transcripts/ai-native-java-engineer-assessment/{Candidate Name}/{filename}
+       → Saves to:
+         evaluations/ai-native-engineer-assessment/java/{Candidate Name}-Technical-Interview-2-Feedback.md
+
 Assessing a candidate for level promotion (A2 / A3 / A4)?
 
   Pre-session (Steps 1 + 2 automated with human gate):
-    └─ @assessment-orchestrator
+    └─ @unified-assessment-agent
        Provide candidate name + target title + PPT + expert assignments
        → Runs Self Presentation Review, waits for your PROCEED/SEND BACK,
           then generates the session question set
 
   Or run each step individually:
-    Step 1 — @self-presentation-reviewer
-      → PPT review only
-
-    Step 2 — @pre-assessment-question-generator
-      → Questions only
+    Or invoke the `review-self-presentation` and `generate-questions` skills directly.
 
   Step 3 — After the session, write feedback:
-    └─ @promotion-assessor
+    └─ @assessment-feedback-generator
        Provide the session transcript
        → Structured promotion feedback with recommendation
 ```
@@ -96,6 +98,11 @@ The pre-screening feedback is not limited to the above list. If the call covers 
       SKILL.md                                  # main AI Native Engineer assessment evaluator
     evaluate-ai-native-prescreening/
       SKILL.md                                  # AI Native pre-screening readiness feedback
+    evaluate-ai-native-java/
+      SKILL.md                                  # Java TI2 hands-on and technical evaluator
+      references/
+        flight-tracker-task.md
+        technical-interview-guide.md
     save-output/
       SKILL.md                                  # saves generated outputs to evaluations/
     analyze-promotion-transcript/
@@ -114,12 +121,17 @@ inputs/
   transcripts/
     ai-native-engineer-assessment/
       *.txt                                     # AI Native main assessment or pre-screening transcripts
+    ai-native-java-engineer-assessment/
+      {Candidate Name}/                          # Java AI Native Engineer TI2 transcripts and notes
+        *.txt
 
 evaluations/
   ai-native-engineer-assessment/
     {Candidate Name}-Evaluation.md              # generated AI Native main assessment output
     feedback/
       {Candidate Name}-Pre-Screening-Feedback.md
+    java/
+      {Candidate Name}-Technical-Interview-2-Feedback.md
 
   promotion-assessment/
     feedback/
