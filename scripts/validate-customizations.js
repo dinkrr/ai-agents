@@ -54,4 +54,36 @@ if (!saveOutput.includes('ai-native-java-feedback')) {
   throw new Error('Save-output skill must support Java TI2 feedback.');
 }
 
+const menteeReferences = [
+  'review-rules.md',
+  'comment-template.md',
+  ...['srp', 'ocp', 'lsp', 'isp', 'dip', 'tda', 'law-of-demeter', 'ods'].map((name) => `clean-design/${name}.md`),
+  ...['naming', 'functions', 'general-principles'].map((name) => `clean-code/${name}.md`)
+];
+const reviewSkillDirectory = path.join(skillsDirectory, 'clean-code-advance-review');
+
+for (const reference of menteeReferences) {
+  const referencePath = path.join(reviewSkillDirectory, 'references', reference);
+  if (!fs.existsSync(referencePath) || fs.statSync(referencePath).size === 0) {
+    throw new Error(`Missing or empty clean-code-advance-review reference: ${reference}`);
+  }
+}
+
+for (const skillName of ['clean-code-advance-review', 'post-mr-review']) {
+  const skill = fs.readFileSync(path.join(skillsDirectory, skillName, 'SKILL.md'), 'utf8');
+  if (!new RegExp(`^name: ${skillName}$`, 'm').test(skill)) {
+    throw new Error(`${skillName} skill name must match its directory name.`);
+  }
+}
+
+const engxReviewer = fs.readFileSync(path.join(agentDirectory, 'engx-reviewer-agent.agent.md'), 'utf8');
+
+if (!engxReviewer.includes('clean-code-advance-review') || !engxReviewer.includes('post-mr-review') || !engxReviewer.includes('mentee-code-review')) {
+  throw new Error('EngX reviewer agent must use clean-code-advance-review, post-mr-review and save-output (mentee-code-review).');
+}
+
+if (!saveOutput.includes('mentee-code-review')) {
+  throw new Error('Save-output skill must support mentee code review rounds.');
+}
+
 console.log('Customization validation passed.');
