@@ -11,6 +11,7 @@ AI Agents for Assessment Activities — automating candidate evaluation workflow
 | **AI Native Engineer Assessment** | `@ai-native-engineer-assessment` | Evaluate a **main assessment**, **pre-screening**, or **Java TI2 interview** using the matching skill. |
 | **Promotion Assessment Feedback** | `@assessment-feedback-generator` | Generate structured **promotion feedback** (A2 / A3 / A4) from an assessment session transcript. |
 | **Unified Assessment** | `@unified-assessment-agent` | Start the pre-assessment workflow: review the presentation, wait for the human approval gate, then generate session questions. |
+| **EngX Reviewer Agent** | `@engx-reviewer-agent` | Review a mentee's MR for EngX Clean Design / Clean Code tasks against the course docs, triage the platform AI review, draft one exact-change comment per violation, post after approval, and re-review fixes. |
 
 ---
 
@@ -63,6 +64,25 @@ Assessing a candidate for level promotion (A2 / A3 / A4)?
     └─ @assessment-feedback-generator
        Provide the session transcript
        → Structured promotion feedback with recommendation
+
+Mentee stuck on an EngX Clean Design / Clean Code task MR?
+  └─ @engx-reviewer-agent
+     Provide:
+       - Mentee name
+       - Local task repo path (under EngX Reviewer)
+       - MR URL on autocode.git.epam.com
+       - Mode: initial or re-review
+       - Optional: the platform AI review comments
+       - Optional: narrowed scope (default is all principles + Clean Code)
+
+     → Reads the task README rules, fetches the MR head into a temporary worktree,
+       runs build and tests (read-only)
+     → Reviews with clean-code-advance-review (violations only, doc-backed, exact before/after code)
+     → Triages the AI review comments as Valid / Partially valid / Invalid
+     → Shows draft notes (one per violation) and waits for your approval
+     → Posts approved notes with post-mr-review (GitLab-MCP, fallback EPAMAutoCodeGit)
+     → Saves to:
+       evaluations/mentee-code-review/{Mentee Name}/{Task Name}-review-{N}.md
 ```
 
 ---
@@ -92,6 +112,7 @@ The pre-screening feedback is not limited to the above list. If the call covers 
     ai-native-engineer-assessment.agent.md      # routes AI Native main assessment vs pre-screening
     assessment-feedback-generator.agent.md      # promotion feedback generator
     unified-assessment-agent.md                 # orchestrator entry point for pre-assessment workflow
+    engx-reviewer-agent.agent.md                # EngX mentee MR review, AI review triage, approval-gated posting
 
   skills/
     evaluate-ai-native/
@@ -105,6 +126,15 @@ The pre-screening feedback is not limited to the above list. If the call covers 
         technical-interview-guide.md
     save-output/
       SKILL.md                                  # saves generated outputs to evaluations/
+    clean-code-advance-review/
+      SKILL.md                                  # violations-only review against docs + AI review triage
+      references/
+        review-rules.md                         # task rules, severity, known AI false positives
+        comment-template.md                     # MR note and review round templates
+        clean-design/                           # srp, ocp, lsp, isp, dip, tda, law-of-demeter, ods (.md)
+        clean-code/                             # naming, functions, general-principles (.md)
+    post-mr-review/
+      SKILL.md                                  # allowed/forbidden GitLab MCP tools, posting rules
     analyze-promotion-transcript/
       SKILL.md
       references/
@@ -139,5 +169,9 @@ evaluations/
 
   pre-assessment/
     {Candidate Name}-{Target Title}-Questions.md
+
+  mentee-code-review/
+    {Mentee Name}/
+      {Task Name}-review-{N}.md                 # one file per review round
 ```
 
